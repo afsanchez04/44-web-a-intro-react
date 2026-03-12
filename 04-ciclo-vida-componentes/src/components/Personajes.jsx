@@ -1,7 +1,9 @@
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
+import { UserContext } from "../context/UserContext"
 
 export const Personajes = () => {
 
+  const { user } = useContext(UserContext)
   const [personajes, setPersonajes] = useState([])
 
   useEffect(() => {
@@ -19,7 +21,14 @@ export const Personajes = () => {
 
   return (
     <>
-      <h2>🫎 Mis personajes favoritos:</h2>
+      <h2>🫎 Mis tema favorito: {user.tema}</h2>
+      <ul>
+        {
+          personajes.map( (per) => (
+            <li key={per.id}>{per.name}, {per.status} </li>
+          ) )
+        }
+      </ul>
     </>
   )
 }

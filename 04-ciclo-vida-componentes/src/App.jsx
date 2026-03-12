@@ -1,24 +1,19 @@
-import { useState } from "react"
+import { useContext } from "react"
+import { Personajes } from "./components/Personajes"
+import { UserContext } from "./context/UserContext"
 
 
 export const App = () => {
 
-  const [nombre, setNombre] = useState("")
-
-  const manejarCambio = (e) => {
-    e.preventDefault()
-    setNombre(e.target.value)
-  }
+  const { user } = useContext(UserContext)
 
   return (
-    <>
-      <h2>Escribe tu nombre</h2>
-      <input
-        type="text"
-        value={nombre}
-        onChange={ manejarCambio }
-        placeholder="John Doe..."
-      />
-    </>
+    <div>
+
+      <h1>User: {user.nombre}</h1>
+
+      <Personajes/>
+
+    </div>
   )
 }
