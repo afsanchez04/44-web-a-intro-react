@@ -1,43 +1,24 @@
-import { useCallback, useEffect, useState } from 'react'
-import CambiarApariencias from './components/CambiarApariencias'
+import { useState } from "react"
 
 
-export function App() {
-  const [mostrarComponente, setMostrarComponente] = useState(true)
+export const App = () => {
 
-  const [estiloTitulo, setEstiloTitulo] = useState({
-    fontSize: '32px',
-    backgroundColor: 'transparent',
-    color: 'black',
-  })
-  const alMontar = useCallback(() => {
-    setEstiloTitulo({
-      fontSize: '56px',
-      backgroundColor: 'lightgreen',
-      color: 'black',
-    })
-  }, [])
-  const alDesmontar = useCallback(() => {
-    setEstiloTitulo({
-      fontSize: '32px',
-      backgroundColor: 'transparent',
-      color: 'orange',
-    })
-  }, [])
-  useEffect(() => {
+  const [nombre, setNombre] = useState("")
 
-    const temporizador = setTimeout(() => {
-      setMostrarComponente(false)
-    }, 4000)
+  const manejarCambio = (e) => {
+    e.preventDefault()
+    setNombre(e.target.value)
+  }
 
-    return () => clearTimeout(temporizador)
-    
-  }, [])
   return (
     <>
-      <h1 style={estiloTitulo}>React</h1>
-      <p>El componente se desmonta automaticamente en 4 segundos.</p>
-      {mostrarComponente && <CambiarApariencias onMount={alMontar} onUnmount={alDesmontar} />}
+      <h2>Escribe tu nombre</h2>
+      <input
+        type="text"
+        value={nombre}
+        onChange={ manejarCambio }
+        placeholder="John Doe..."
+      />
     </>
   )
 }
